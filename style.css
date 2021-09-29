@@ -1,0 +1,50 @@
+#window{
+    margin-top: 5%;
+    background-color: navy;
+    color: paleturquoise;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px navy;
+
+}
+.swapbox{
+    overflow: auto;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: gray;
+    border-radius: 20px;
+    border: 1px solid green;
+}
+.swapbox_select{
+    width: 50%;
+    float: left;
+}
+.token_select{
+    padding: 5px 0;
+}
+.token_select:hover{
+    background-color: navy;
+    cursor: pointer;
+}
+.token_list_img, .token_image{
+    width: 40px;
+}
+.modal-body{
+    height: 600px;
+    overflow: scroll;
+}
+.token_row:hover{
+    padding: 5px 10px;
+}
+.token_row:hover{
+    background-color: navy;
+    cursor: pointer;
+    color:white
+}
+body {
+    background-image: url("background.jpg");
+    background-size: cover;
+  }
+input{
+    width: 100%;
+}
