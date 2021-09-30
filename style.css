@@ -54,12 +54,19 @@ body {
   }
   .form-control{
       background-color: #1c2140;
-      color:white
-    
+      color:white;
+      border-color:#1c2140;
   }
+  input.form-control{
+    text-align: right;
+  }
+  
   .form-control:focus{
     background-color: #1c2140;
     color:White;
+  }
+  .form-control:disabled {
+    background-color: #1c2140;
   }
 #search-box{
     width: 100%;
@@ -75,9 +82,7 @@ body {
 #chg-from-to-btn{
     margin-left: 45%;    
 }
-.form-control:disabled {
-    background-color: #1c2140;
-  }
+
 .modal-body::-webkit-scrollbar {
     width: 20px;               /* width of the entire scrollbar */
   }
