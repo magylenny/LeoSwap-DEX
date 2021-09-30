@@ -1,19 +1,18 @@
 #window{
     margin-top: 5%;
-    background-color: navy;
-    color: paleturquoise;
+    background-color: #102b72;
+    color: white;
     padding: 15px;
     border-radius: 5px;
-    box-shadow: 0 0 5px navy;
+    box-shadow: 0 0 5px #1c2140;
 
 }
 .swapbox{
     overflow: auto;
     margin: 20px 0;
     padding: 20px;
-    background-color: gray;
+    background-color: #1c2140;
     border-radius: 20px;
-    border: 1px solid green;
 }
 .swapbox_select{
     width: 50%;
@@ -23,7 +22,7 @@
     padding: 5px 0;
 }
 .token_select:hover{
-    background-color: navy;
+    background-color: #102b72;
     cursor: pointer;
 }
 .token_list_img, .token_image{
@@ -33,18 +32,62 @@
     height: 600px;
     overflow: scroll;
 }
+.modal-content{
+    background-color:#1c2140;
+    color:white
+}
 .token_row:hover{
     padding: 5px 10px;
 }
 .token_row:hover{
-    background-color: navy;
+    background-color: #102b72;
     cursor: pointer;
     color:white
+}
+.btn{
+    background-color:#1c2140;
+    color:white;
 }
 body {
     background-image: url("background.jpg");
     background-size: cover;
   }
-input{
+  .form-control{
+      background-color: #1c2140;
+      color:white
+    
+  }
+  .form-control:focus{
+    background-color: #1c2140;
+    color:White;
+  }
+#search-box{
     width: 100%;
+    background-color: #102b72;
+    color:white
 }
+#swap_button:hover{
+    color:white
+}
+#chg-from-to-btn:hover{
+    background-color:#102b72;
+}
+#chg-from-to-btn{
+    margin-left: 45%;    
+}
+.form-control:disabled {
+    background-color: #1c2140;
+  }
+.modal-body::-webkit-scrollbar {
+    width: 20px;               /* width of the entire scrollbar */
+  }
+  
+  .modal-body::-webkit-scrollbar-track {
+    background: #102b72;        /* color of the tracking area */
+  }
+  
+  .modal-body::-webkit-scrollbar-thumb {
+    background-color: #1c2140;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+

@@ -114,14 +114,29 @@ const closeModal = () => {
     document.getElementById("token_modal").style.display = "none"
 }
 
-async function getQuote(event) {
+async function getQuote() {
     let amount;
     let source = event.target;
 
     if (!currentTrade.from || !currentTrade.to || !document.getElementById("from_amount").value) {
         return;
     };
-    if (source === document.getElementById("from_amount")) {
+
+    amount = Number(
+        document.getElementById("from_amount").value * 10 ** currentTrade.from.decimals
+    );
+    const quote = await Moralis.Plugins.oneInch.quote({
+        chain: 'eth', // The blockchain you want to use (eth/bsc/polygon)
+        fromTokenAddress: currentTrade.from.address, // The token you want to swap
+        toTokenAddress: currentTrade.to.address, // The token you want to receive
+        amount: amount,
+    });
+    console.log(quote);
+    document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
+    document.getElementById("to_amount").value = quote.toTokenAmount / (10 ** quote.toToken.decimals);
+
+    /*else if (source === document.getElementById("to_amount")) {
+        //need to chamge this part
         amount = Number(
             document.getElementById("from_amount").value * 10 ** currentTrade.from.decimals
         );
@@ -133,22 +148,10 @@ async function getQuote(event) {
         });
         console.log(quote);
         document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
-        document.getElementById("to_amount").value = quote.toTokenAmount / (10 ** quote.toToken.decimals);
-    }
-    if (source === document.getElementById("to_amount")) {
-        amount = Number(
-            document.getElementById("to_amount").value * 10 ** currentTrade.to.decimals
-        );
-        const quote = await Moralis.Plugins.oneInch.quote({
-            chain: 'eth', // The blockchain you want to use (eth/bsc/polygon)
-            fromTokenAddress: currentTrade.to.address, // The token you want to swap
-            toTokenAddress: currentTrade.from.address, // The token you want to receive
-            amount: amount,
-        });
-        console.log(quote);
-        document.getElementById("gas_estimate").innerHTML = quote.estimatedGas;
         document.getElementById("from_amount").value = quote.toTokenAmount / (10 ** quote.toToken.decimals);
-    }
+    }*/
+
+
 
 }
 
@@ -190,16 +193,18 @@ function doSwap(userAddress, amount) {
 }
 
 function changeFromTo() {
-    console.log(currentTrade)
-    document.getElementById("to_token_img").src = currentTrade.from.logoURI;
-    document.getElementById("to_token_text").innerHTML = currentTrade.from.symbol;
-    document.getElementById("from_token_img").src = currentTrade.to.logoURI;
-    document.getElementById("from_token_text").innerHTML = currentTrade.to.symbol;
-
-    let temp = currentTrade.from
-    currentTrade.from = currentTrade.to.address;
-    currentTrade.to = temp.address;
-    console.log(currentTrade)
+    let temp = currentTrade.to
+    currentTrade.to = currentTrade.from;
+    currentTrade.from = temp;
+    document.getElementById("to_token_img").src = currentTrade.to.logoURI;
+    document.getElementById("to_token_text").innerHTML = currentTrade.to.symbol;
+    document.getElementById("from_token_img").src = currentTrade.from.logoURI;
+    document.getElementById("from_token_text").innerHTML = currentTrade.from.symbol;
+    temp = document.getElementById("from_amount").value
+    document.getElementById("from_amount").value = document.getElementById("to_amount").value
+    document.getElementById("to_amount").value = temp;
+    console.log(currentTrade);
+    getQuote();
 }
 
 
@@ -209,7 +214,7 @@ document.getElementById("to_token_select").onclick = (() => { openModal("to") })
 document.getElementById("modal_close").onclick = closeModal;
 document.getElementById("login_button").onclick = login;
 document.getElementById("from_amount").addEventListener('input', getQuote);
-document.getElementById("to_amount").addEventListener('input', getQuote);
+//document.getElementById("to_amount").addEventListener('input', getQuote);
 document.getElementById("swap_button").onclick = trySwap;
 document.getElementById("search-box").addEventListener('input', filterList);
 document.getElementById("chg-from-to-btn").onclick = changeFromTo;
